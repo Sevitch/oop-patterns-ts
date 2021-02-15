@@ -1,22 +1,8 @@
-import {Observable} from "./observable";
 import {Subject} from "./subject";
 
-
-// TODO: complete
-new Observable(sub => {
-    sub.next(7);
-    sub.next(10);
-}).subscribe({
-    next: (val) => {
-        console.log(val);
-    },
-    error: (error) => {
-        console.log(error);
-    }
-});
-
-
-// Works
+/***
+ * Example #1
+ */
 const testSub = new Subject<number>();
 const testSubSubscription = testSub.subscribe({
     next: (val) => {
@@ -24,11 +10,14 @@ const testSubSubscription = testSub.subscribe({
     },
     error: (val) => {
         console.log(val);
+    },
+    complete: () => {
+        console.log('complete');
     }
 })
 
 setTimeout(() => testSub.next(15), 1500);
 testSub.next(5);
+// testSub.complete();
 testSub.error(0);
-
 // testSubSubscription.unsubscribe();
